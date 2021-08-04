@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>kinolar ro'yxati</title>
+</head>
+<body>
+    {% for movie in movie_list %}
+        <h1>{{ movie.title }}</h1>
+        <p>{{ movie.description }}</p>
+    {% endfor %}
+</body>
+</html>
