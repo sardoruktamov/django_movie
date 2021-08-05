@@ -3,6 +3,8 @@ from datetime import date
 
 
 # Create your models here.
+from django.urls import reverse
+
 
 class Category(models.Model):
     name = models.CharField("Kategoriya", max_length=150)
@@ -61,6 +63,9 @@ class Movie(models.Model):
     category = models.ForeignKey(Category, verbose_name="Kategoriya", on_delete=models.SET_NULL, null=True)
     url = models.SlugField(max_length=160, unique=True)
     draft = models.BooleanField("Qoralama", default=False)
+
+    def get_absolute_url(self):
+        return reverse("movie_detail", kwargs={"slug": self.url})
 
     def __str__(self):
         return self.title
