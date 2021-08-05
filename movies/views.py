@@ -12,3 +12,13 @@ class MoviesView(View):
             "movie_list": movies,
         }
         return render(request, "movies/movie_list.html", context)
+
+
+class MovieDetailView(View):
+    """kino xaqida batafsil ko`rish"""
+    def get(self, request, pk):
+        movie = Movie.objects.get(id=pk)
+        context = {
+            "movie": movie,
+        }
+        return render(request, "movies/movie_detail.html", context)
