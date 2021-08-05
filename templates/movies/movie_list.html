@@ -1,143 +1,9 @@
-{#{% extends 'movies/base.html' %}#}
-{#{% block title %} {% endblock title %}#}
-{#{% block header %} bg1 {% endblock header %}#}
-{#{% block movie %}#}
-<!DOCTYPE html>
-{% load static %}
-{#recaptcha3 #}
-<html lang="ru">
-<head>
-    <!-- //Meta tag Keywords -->
-    <title>{% block title %} {% endblock title %}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- //Meta tag Keywords -->
-    <!-- Custom-Files -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <!-- Bootstrap-Core-CSS -->
-    <!--/ Style-CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
-    <!--// Style-CSS -->
-    <!-- font-awesome-icons -->
-    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
-    <!-- //font-awesome-icons -->
-    <!-- /Fonts -->
-    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700"
-          rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900"
-          rel="stylesheet">
-    <!-- //Fonts -->
-
-{#      {% recaptcha_init %}#}
-{#      {% recaptcha_ready action_name='homepage' %}#}
-</head>
-<body>
-<div id="page" class="page">
-
-
-
-
+{% extends 'movies/base.html' %}
+{% block title %} {% endblock title %}
+{% block header %} bg1 {% endblock header %}
+{% block movie %}
     <div class="left-ads-display col-lg-9">
         <div class="row">
-        <div class="col-3">
-            <div class="search-bar w3layouts-newsletter">
-    <h3 class="sear-head editContent">Поиск фильма</h3>
-    <form action="search-erl.html" method="get" class="d-flex editContent">
-        <input type="search" placeholder="Введите название..." name="q" class="form-control" required="">
-        <button type="submit" class="btn1 btn">
-            <span class="fa fa-search" aria-hidden="true"></span>
-        </button>
-    </form>
-</div>
-<!--preference -->
-<form action="filter-url.html" method="get" name="filter">
-    <div class="left-side my-4">
-        <h3 class="sear-head editContent">Жанры</h3>
-        <ul class="w3layouts-box-list">
-            {% for genre in view.get_genres %}
-                <li class="editContent">
-                    <input type="checkbox" class="checked" name="genre" value="{{ genre.id }}">
-                    <span class="span editContent">{{ genre.name }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <!-- // preference -->
-    <!-- discounts -->
-
-    <div class="left-side">
-        <h3 class="sear-head editContent">Год</h3>
-        <ul class="w3layouts-box-list">
-            {% for movie in view.get_years %}
-                <li class="editContent">
-                    <input type="checkbox" class="checked" name="year" value="{{ movie.year }}">
-                    <span class="span editContent">{{ movie.year }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <button type="submit">Найти</button>
-</form>
-<!-- //discounts -->
-<!-- reviews -->
-<div class="customer-rev left-side my-4">
-    <h3 class="sear-head editContent">Рейтинг</h3>
-    <ul class="w3layouts-box-list">
-        <li>
-            <a href="#">
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="editContent">5.0</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="editContent">4.0</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star-half-o" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="editContent">3.5</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="editContent">3.0</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star-half-o" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="editContent">2.5</span>
-            </a>
-        </li>
-    </ul>
-</div>
-        </div>
-        <div class="col-9">
-        <div class="col-12 row">
             {% for movie in movie_list %}
                 <div class="col-md-4 product-men">
                     <div class="product-shoe-info editContent text-center mt-lg-4">
@@ -155,7 +21,6 @@
                             <div class="product_price">
                                 <div class="grid-price">
                                     <span class="money editContent">{{ movie.tagline }}</span>
-                                    <p>{{ movie.country }}, {{ movie.year }}</p>
                                 </div>
                             </div>
                             <ul class="stars">
@@ -165,7 +30,7 @@
                                 <li><a href="#"><span class="fa fa-star"
                                                       aria-hidden="true"></span></a>
                                 </li>
-                                <li><a href="#"><span class="fa fa-star"
+                                <li><a href="#"><span class="fa fa-star-half-o"
                                                       aria-hidden="true"></span></a>
                                 </li>
                                 <li><a href="#"><span class="fa fa-star-half-o"
@@ -180,16 +45,8 @@
                 </div>
             {% endfor %}
         </div>
-        </div>
-
-        </div>
         <div class="grid-img-right mt-4 text-right bg bg1" >
             {% include 'include/pagination.html' %}
         </div>
     </div>
-
-</div>
-<script src="{% static 'js/scripts.js' %}"></script>
-<script src="http://twitter.github.com/hogan.js/builds/3.0.1/hogan-3.0.1.js"></script>
-</body>
-</html>
+{% endblock movie %}

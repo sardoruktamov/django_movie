@@ -15,4 +15,4 @@ class MoviesView(ListView):
 class MovieDetailView(DetailView):
     """kino xaqida batafsil ko`rish"""
     model = Movie
-    slug_field = url
+    slug_field = "url"
