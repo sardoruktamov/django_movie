@@ -3,7 +3,7 @@ from .models import Category, Actor, Genre, RatingStar, Rating, Movie, MovieShot
 
 # Register your models here.
 
-admin.site.register(Category)
+# admin.site.register(Category)
 admin.site.register(Actor)
 # admin.site.register(Genre)
 # admin.site.register(Movie)
@@ -19,3 +19,7 @@ admin.site.register(Movie, MovieAdmin)
 class GenreAdmin(admin.ModelAdmin):
     prepopulated_fields = {"url": ("name",)}
 admin.site.register(Genre, GenreAdmin)
+
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"url": ("name",)}
+admin.site.register(Category, CategoryAdmin)
