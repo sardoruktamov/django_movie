@@ -162,6 +162,15 @@
                             Отправить
                         </button>
                     </form>
+                <h2>qoldirilgan sharhlar</h2>
+                    {% for review in movie.reviews_set.all %}
+                        <h5 class="editContent mt-5">
+                            {{ review.name }}
+                        </h5>
+                        <p>
+                        {{ review.text }}
+                        </p>
+                    {% endfor %}
                 </div>
                 <!--  //contact form grid ends here -->
             </div>
