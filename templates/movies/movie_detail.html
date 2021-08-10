@@ -163,17 +163,6 @@
                         </button>
                     </form>
                 <h2>qoldirilgan sharhlar</h2>
-                    {% for review in movie.reviews_set.all %}
-                        <h5 class="editContent mt-5">
-                            {{ review.name }}
-                        </h5>
-                        <p>
-                        {{ review.text }}
-                        </p>
-                        <a href="#formReview" onclick="addReview('{{ review.name }}', '{{ review.id }}')">Javob</a>
-
-
-                    {% endfor %}
                 </div>
                 <!--  //contact form grid ends here -->
             </div>
