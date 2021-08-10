@@ -146,14 +146,14 @@
                                     Ism *
                                 </label>
 {#                                {{ form.name }}#}
-                                <input type="text" name="name" id="contactusername" required="">
+                                <input type="text" name="name" id="contactusername" required="" value="{{ request.user.first_name }} {{ request.user.last_name }}">
                             </div>
                             <div class="col-sm-6 form-group ml-sm-3 editContent">
                                 <label for="contactemail" class="editContent">
                                     Email *
                                 </label>
 {#                                {{ form.email }}#}
-                                <input type="email" name="email" id="contactemail" required="">
+                                <input type="email" name="email" id="contactemail" required="" value="{{ request.user.email }}">
                             </div>
                             {{ form.captcha }}
                         </div>
