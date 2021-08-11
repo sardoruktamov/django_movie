@@ -12,14 +12,24 @@ admin.site.register(RatingStar)
 admin.site.register(Rating)
 
 
+@admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
+    list_display = ("id", "title", "year", "country", "draft",)
+    list_display_links = ("id", "title",)
+    list_filter = ("category", "country", "year",)
+    search_fields = ("title", "category__name", "year")
     prepopulated_fields = {"url": ("title",)}
-admin.site.register(Movie, MovieAdmin)
 
+
+@admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
+    list_display = ("id", "name", "description",)
+    list_display_links = ("id", "name",)
     prepopulated_fields = {"url": ("name",)}
-admin.site.register(Genre, GenreAdmin)
 
+
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("id", "name", "url",)
+    list_display_links = ("name", "id",)
     prepopulated_fields = {"url": ("name",)}
-admin.site.register(Category, CategoryAdmin)
