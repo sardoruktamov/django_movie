@@ -7,7 +7,8 @@ admin.site.register(MovieShots)
 admin.site.register(RatingStar)
 admin.site.register(Rating)
 
-class ReviewInLine(admin.StackedInline):  #ikinchi variant  admin.TabularInline
+
+class ReviewInLine(admin.StackedInline):  # ikinchi variant  admin.TabularInline
     model = Reviews
     extra = 1
     readonly_fields = ("name", "email",)
@@ -21,8 +22,16 @@ class MovieAdmin(admin.ModelAdmin):
     search_fields = ("title", "category__name", "year")
     prepopulated_fields = {"url": ("title",)}
     inlines = [ReviewInLine]
-    save_on_top = True              #saqlash va o`chirish tugmalarini sahifa yuqorisiga ham qo`shimcha sifatida olib chiqish uchun
-    list_editable = ("draft",)      # admin sahifasida obyectni tashqi sahifadan turib o`zgartirish uchun (bu yerda qoralamani checkbox sifatida ishlatilyapti)
+    save_on_top = True  # saqlash va o`chirish tugmalarini sahifa yuqorisiga ham qo`shimcha sifatida olib chiqish uchun
+    list_editable = (
+    "draft",)  # admin sahifasida obyectni tashqi sahifadan turib o`zgartirish uchun (bu yerda qoralamani checkbox sifatida ishlatilyapti)
+    # fields = (("actors", "directors", "genres"),)
+    # fieldsets = (             #ko`rinish qismidagi malumotlarni guruhlashda foydalanamiz
+    #     (None, {
+    #         "fields": (("title", "tagline"),)
+    #     }),
+    # )
+
 
 @admin.register(Reviews)
 class RevievAdmin(admin.ModelAdmin):
