@@ -1,11 +1,21 @@
 from django.contrib import admin
 from .models import Category, Actor, Genre, RatingStar, Rating, Movie, MovieShots, Reviews
+from django.utils.safestring import mark_safe
 
 # admin.site.register(Reviews)
-admin.site.register(Actor)
+# admin.site.register(Actor)
 admin.site.register(MovieShots)
 admin.site.register(RatingStar)
 admin.site.register(Rating)
+
+@admin.register(Actor)
+class ActorAdmin(admin.ModelAdmin):
+    list_display = ("name", "age", "get_image")
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="50" height="60" >')
+    
+    get_image.short_description = "rasmlar"
 
 
 class ReviewInLine(admin.StackedInline):  # ikinchi variant  admin.TabularInline
