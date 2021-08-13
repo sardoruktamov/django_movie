@@ -34,9 +34,15 @@ class ReviewInLine(admin.StackedInline):  # ikinchi variant  admin.TabularInline
     extra = 1
     readonly_fields = ("name", "email",)
 
-class MovieShotsInLine(admin.StackedInline):
+class MovieShotsInLine(admin.TabularInline):
     model = MovieShots
     extra = 1
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="60" height="70" >')
+
+    get_image.short_description = "rasm"
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
@@ -47,15 +53,20 @@ class MovieAdmin(admin.ModelAdmin):
     prepopulated_fields = {"url": ("title",)}
     inlines = [MovieShotsInLine, ReviewInLine]
     save_on_top = True  # saqlash va o`chirish tugmalarini sahifa yuqorisiga ham qo`shimcha sifatida olib chiqish uchun
+    save_as = True
     list_editable = ("draft",)  # admin sahifasida obyectni tashqi sahifadan turib
                                 # o`zgartirish uchun (bu yerda qoralamani checkbox sifatida ishlatilyapti)
+    readonly_fields = ("get_image",)
     # fields = (("actors", "directors", "genres"),)
     # fieldsets = (             #ko`rinish qismidagi malumotlarni guruhlashda foydalanamiz
-    #     (None, {
-    #         "fields": (("title", "tagline"),)
+    #     ("Actors", {
+    #         "fields": (("deskription", "poster"),)
     #     }),
     # )
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.poster.url} width="60" height="70" >')
 
+    get_image.short_description = "asosiy rasm"
 
 @admin.register(Reviews)
 class RevievAdmin(admin.ModelAdmin):
