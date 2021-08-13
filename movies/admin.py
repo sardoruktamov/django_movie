@@ -4,18 +4,29 @@ from django.utils.safestring import mark_safe
 
 # admin.site.register(Reviews)
 # admin.site.register(Actor)
-admin.site.register(MovieShots)
+# admin.site.register(MovieShots)
 admin.site.register(RatingStar)
 admin.site.register(Rating)
+
+@admin.register(MovieShots)
+class MovieShotsAdmin(admin.ModelAdmin):
+    list_display = ("title", "movie", "get_image")
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="50" height="60" >')
+
+    get_image.short_description = "rasm"
 
 @admin.register(Actor)
 class ActorAdmin(admin.ModelAdmin):
     list_display = ("name", "age", "get_image")
+    readonly_fields = ("get_image",)
 
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.image.url} width="50" height="60" >')
     
-    get_image.short_description = "rasmlar"
+    get_image.short_description = "rasm"
 
 
 class ReviewInLine(admin.StackedInline):  # ikinchi variant  admin.TabularInline
