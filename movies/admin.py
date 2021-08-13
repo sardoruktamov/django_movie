@@ -34,6 +34,9 @@ class ReviewInLine(admin.StackedInline):  # ikinchi variant  admin.TabularInline
     extra = 1
     readonly_fields = ("name", "email",)
 
+class MovieShotsInLine(admin.StackedInline):
+    model = MovieShots
+    extra = 1
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
@@ -42,10 +45,10 @@ class MovieAdmin(admin.ModelAdmin):
     list_filter = ("category", "country", "year",)
     search_fields = ("title", "category__name", "year")
     prepopulated_fields = {"url": ("title",)}
-    inlines = [ReviewInLine]
+    inlines = [MovieShotsInLine, ReviewInLine]
     save_on_top = True  # saqlash va o`chirish tugmalarini sahifa yuqorisiga ham qo`shimcha sifatida olib chiqish uchun
-    list_editable = (
-    "draft",)  # admin sahifasida obyectni tashqi sahifadan turib o`zgartirish uchun (bu yerda qoralamani checkbox sifatida ishlatilyapti)
+    list_editable = ("draft",)  # admin sahifasida obyectni tashqi sahifadan turib
+                                # o`zgartirish uchun (bu yerda qoralamani checkbox sifatida ishlatilyapti)
     # fields = (("actors", "directors", "genres"),)
     # fieldsets = (             #ko`rinish qismidagi malumotlarni guruhlashda foydalanamiz
     #     (None, {
@@ -72,3 +75,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "url",)
     list_display_links = ("name", "id",)
     prepopulated_fields = {"url": ("name",)}
+
+
+admin.site.site_title = "Django movies"
+admin.site.site_header = "Boshqaruv paneli"
