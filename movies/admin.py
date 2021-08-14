@@ -63,17 +63,17 @@ class MovieAdmin(admin.ModelAdmin):
     save_as = True
     list_editable = ("draft",)  # admin sahifasida obyectni tashqi sahifadan turib
                                 # o`zgartirish uchun (bu yerda qoralamani checkbox sifatida ishlatilyapti)
-    form = MovieAdminForm
+    form = MovieAdminForm                       # class MovieShotsInLine(admin.TabularInline) qatorga tegishli
     actions = ["publish", "unpublish"]
     readonly_fields = ("get_image",)
     # fields = (("actors", "directors", "genres"),)
-    # fieldsets = (             #ko`rinish qismidagi malumotlarni guruhlashda foydalanamiz
+    # fieldsets = (             # batafsil ko`rinish qismidagi malumotlarni guruhlashda foydalanamiz
     #     ("Actors", {
     #         "fields": (("deskription", "poster"),)
     #     }),
     # )
 
-    def unpublish(self, request, queryset):
+    def unpublish(self, request, queryset):         #action =["publish", "unpublish"]
         """Nashrdan chiqarish"""
         row_update = queryset.update(draft=True)
         if row_update == 1:
@@ -82,7 +82,7 @@ class MovieAdmin(admin.ModelAdmin):
             message_bit = f"{row_update} yozuvlar yangilandi"
         self.message_user(request, f"{message_bit}")
 
-    def publish(self, request, queryset):
+    def publish(self, request, queryset):           #action =["publish", "unpublish"]
         """Nashr qilish"""
         row_update = queryset.update(draft=False)
         if row_update == 1:
@@ -91,11 +91,11 @@ class MovieAdmin(admin.ModelAdmin):
             message_bit = f"{row_update} yozuvlar yangilandi"
         self.message_user(request, f"{message_bit}")
 
-    publish.short_description = "Nashr qilish"
-    publish.allowed_permissions = ('change',)
+    publish.short_description = "Nashr qilish"              #action =["publish", "unpublish"]
+    publish.allowed_permissions = ('change',)               #action =["publish", "unpublish"]
 
-    unpublish.short_description = "Nashrdan chiqarish"
-    unpublish.allowed_permissions = ('change',)
+    unpublish.short_description = "Nashrdan chiqarish"      #action =["publish", "unpublish"]
+    unpublish.allowed_permissions = ('change',)             #action =["publish", "unpublish"]
 
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.poster.url} width="60" height="70" >')
