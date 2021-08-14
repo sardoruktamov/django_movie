@@ -64,6 +64,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_editable = ("draft",)  # admin sahifasida obyectni tashqi sahifadan turib
                                 # o`zgartirish uchun (bu yerda qoralamani checkbox sifatida ishlatilyapti)
     form = MovieAdminForm
+    actions = ["publish", "unpublish"]
     readonly_fields = ("get_image",)
     # fields = (("actors", "directors", "genres"),)
     # fieldsets = (             #ko`rinish qismidagi malumotlarni guruhlashda foydalanamiz
@@ -71,6 +72,31 @@ class MovieAdmin(admin.ModelAdmin):
     #         "fields": (("deskription", "poster"),)
     #     }),
     # )
+
+    def unpublish(self, request, queryset):
+        """Nashrdan chiqarish"""
+        row_update = queryset.update(draft=True)
+        if row_update == 1:
+            message_bit = "1 ta yozuv yangilandi"
+        else:
+            message_bit = f"{row_update} yozuvlar yangilandi"
+        self.message_user(request, f"{message_bit}")
+
+    def publish(self, request, queryset):
+        """Nashr qilish"""
+        row_update = queryset.update(draft=False)
+        if row_update == 1:
+            message_bit = "1 ta yozuv yangilandi"
+        else:
+            message_bit = f"{row_update} yozuvlar yangilandi"
+        self.message_user(request, f"{message_bit}")
+
+    publish.short_description = "Nashr qilish"
+    publish.allowed_permissions = ('change',)
+
+    unpublish.short_description = "Nashrdan chiqarish"
+    unpublish.allowed_permissions = ('change',)
+
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.poster.url} width="60" height="70" >')
 
