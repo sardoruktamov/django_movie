@@ -5,16 +5,19 @@ from .models import Movie, Category
 from django.views.generic.base import View
 from .forms import ReviewForm
 
+
 class MoviesView(ListView):
     """kinolar royxati"""
     model = Movie
     queryset = Movie.objects.filter(draft=False)
+
     # template_name = "movies/movie_list.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context["categories"] = Category.objects.all()
         return context
+
 
 class MovieDetailView(DetailView):
     """kino xaqida batafsil ko`rish"""
@@ -25,6 +28,7 @@ class MovieDetailView(DetailView):
         context = super().get_context_data(*args, **kwargs)
         context["categories"] = Category.objects.all()
         return context
+
 
 class AddReview(View):
     def post(self, request, pk):
