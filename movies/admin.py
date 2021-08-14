@@ -1,10 +1,17 @@
+# from django import forms
+from django import forms
 from django.contrib import admin
 from .models import Category, Actor, Genre, RatingStar, Rating, Movie, MovieShots, Reviews
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-# admin.site.register(Reviews)
-# admin.site.register(Actor)
-# admin.site.register(MovieShots)
+
+class MovieAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Kino tavsifi", widget=CKEditorUploadingWidget())
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
 admin.site.register(RatingStar)
 admin.site.register(Rating)
 
@@ -56,6 +63,7 @@ class MovieAdmin(admin.ModelAdmin):
     save_as = True
     list_editable = ("draft",)  # admin sahifasida obyectni tashqi sahifadan turib
                                 # o`zgartirish uchun (bu yerda qoralamani checkbox sifatida ishlatilyapti)
+    form = MovieAdminForm
     readonly_fields = ("get_image",)
     # fields = (("actors", "directors", "genres"),)
     # fieldsets = (             #ko`rinish qismidagi malumotlarni guruhlashda foydalanamiz
