@@ -8,6 +8,7 @@ def get_categories():
     """barcha categoriyalarni chiqarish"""
     return Category.objects.all()
 
-# def get_last_movies():
-#     movies = Movie.objects.order_by("id")[:5]
-#     return {}
+@register.inclusion_tag('movies/tags/last_movie.html')
+def get_last_movies(count=5):
+    movies = Movie.objects.order_by("id")[:count]
+    return {"last_movies":movies}
