@@ -1,4 +1,5 @@
 {#{% load i18n movie_tag %}#}
+{% load movie_tag %}
 <header class="header">
     <div class="container-fluid px-lg-5">
         <!-- nav -->
@@ -12,7 +13,7 @@
             <label for="drop" class="toggle">Menu</label>
             <input type="checkbox" id="drop">
             <ul class="menu mt-2">
-                <li class="active"><a href="index.html">Главная</a></li>
+                <li class="active"><a href="/">Главная</a></li>
                 <li>
                     <!-- First Tier Drop Down -->
                     <label for="drop-2" class="toggle">Категории <span
@@ -21,11 +22,9 @@
                                                 aria-hidden="true"></span></a>
                     <input type="checkbox" id="drop-2">
                     <ul>
-                        {#                        {% get_categories as categories %}#}
+                        {% get_categories as categories %}
                         {% for category in categories %}
                             <li><a href="/">{{ category.name }}</a></li>
-                            <li><a href="/">categoriya 1</a></li>
-                            <li><a href="/">categoriya 2</a></li>
                         {% endfor %}
                     </ul>
                 </li>
