@@ -9,7 +9,7 @@
     </form>
 </div>
 <!--preference -->
-<form action="filter-url" method="get" name="filter">
+<form action="search-url" method="get" name="filter">
     <div class="left-side my-4">
         <h3 class="sear-head editContent">Janr</h3>
         <ul class="w3layouts-box-list">
@@ -22,8 +22,8 @@
         </ul>
     </div>
     <!-- // preference -->
-    <!-- discounts -->
-
+    <!-- discounts --></form>
+<form action="{% url 'filter' %}" method="get" name="filter">
     <div class="left-side">
         <h3 class="sear-head editContent">Yil</h3>
         <ul class="w3layouts-box-list">
@@ -35,7 +35,7 @@
             {% endfor %}
         </ul>
     </div>
-    <button type="submit">Найти</button>
+    <button type="submit">Qidirish</button>
 </form>
 <!-- //discounts -->
 <!-- reviews -->

@@ -46,3 +46,10 @@ class ActorView(GenreYear, DetailView):
     model = Actor
     template_name = 'movies/actor.html'
     slug_field = "name"
+
+class FilterMoviesView(GenreYear, ListView):
+    """kinolarni filterlash"""
+    def get_queryset(self):
+        queryset = Movie.objects.filter(year__in=self.request.GET.getlist("year"))
+        return queryset
+
