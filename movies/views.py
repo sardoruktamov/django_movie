@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.http import JsonResponse, HttpResponse
 from .models import Movie, Category, Actor, Genre
 from django.views.generic.base import View
-from .forms import ReviewForm
+from .forms import ReviewForm, RatingForm
 
 
 class GenreYear:
@@ -27,6 +27,11 @@ class MovieDetailView(GenreYear, DetailView):
     """kino xaqida batafsil ko`rish"""
     model = Movie
     slug_field = "url"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["star_form"] = RatingForm()
+        return context
 
 
 class AddReview(View):
