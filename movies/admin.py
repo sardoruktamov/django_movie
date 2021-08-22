@@ -13,7 +13,11 @@ class MovieAdminForm(forms.ModelForm):
         fields = '__all__'
 
 admin.site.register(RatingStar)
-admin.site.register(Rating)
+# admin.site.register(Rating)
+
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ("star", "movie", "ip")
 
 @admin.register(MovieShots)
 class MovieShotsAdmin(admin.ModelAdmin):
