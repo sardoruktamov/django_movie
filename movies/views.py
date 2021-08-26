@@ -110,12 +110,12 @@ class AddStarRating(View):
 
 
 class Search(ListView):
-    paginate_by = 3
+    paginate_by = 1
 
     def get_queryset(self):
         return Movie.objects.filter(Q(title__icontains=self.request.GET.get("q")) | Q(description__icontains=self.request.GET.get("q")))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["q"] = self.request.GET.get("q")
+        context["q"] =f'q={self.request.GET.get("q")}&'
         return context
