@@ -4,10 +4,13 @@ from django.contrib import admin
 from .models import Category, Actor, Genre, RatingStar, Rating, Movie, MovieShots, Reviews
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from modeltranslation.admin import TranslationAdmin
+
 
 
 class MovieAdminForm(forms.ModelForm):
-    description = forms.CharField(label="Kino tavsifi", widget=CKEditorUploadingWidget())
+    description_uz = forms.CharField(label="Kino tavsifi_uz", widget=CKEditorUploadingWidget())
+    description_ru = forms.CharField(label="Kino tavsifi_ru", widget=CKEditorUploadingWidget())
     class Meta:
         model = Movie
         fields = '__all__'
@@ -20,7 +23,7 @@ class RatingAdmin(admin.ModelAdmin):
     list_display = ("star", "movie", "ip")
 
 @admin.register(MovieShots)
-class MovieShotsAdmin(admin.ModelAdmin):
+class MovieShotsAdmin(TranslationAdmin):
     list_display = ("title", "movie", "get_image")
     readonly_fields = ("get_image",)
 
@@ -30,7 +33,7 @@ class MovieShotsAdmin(admin.ModelAdmin):
     get_image.short_description = "rasm"
 
 @admin.register(Actor)
-class ActorAdmin(admin.ModelAdmin):
+class ActorAdmin(TranslationAdmin):
     list_display = ("name", "age", "get_image")
     readonly_fields = ("get_image",)
 
@@ -55,8 +58,9 @@ class MovieShotsInLine(admin.TabularInline):
 
     get_image.short_description = "rasm"
 
+
 @admin.register(Movie)
-class MovieAdmin(admin.ModelAdmin):
+class MovieAdmin(TranslationAdmin):
     list_display = ("id", "title", "year", "country", "draft",)
     list_display_links = ("id", "title",)
     list_filter = ("category", "country", "year",)
@@ -113,14 +117,14 @@ class RevievAdmin(admin.ModelAdmin):
 
 
 @admin.register(Genre)
-class GenreAdmin(admin.ModelAdmin):
+class GenreAdmin(TranslationAdmin):
     list_display = ("id", "name", "description",)
     list_display_links = ("id", "name",)
     prepopulated_fields = {"url": ("name",)}
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     list_display = ("id", "name", "url",)
     list_display_links = ("name", "id",)
     prepopulated_fields = {"url": ("name",)}
