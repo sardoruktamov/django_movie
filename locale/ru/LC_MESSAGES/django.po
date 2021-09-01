@@ -279,6 +279,7 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
+
 #: .\templates\movies\movie_detail.html:25
 msgid "Yil"
 msgstr "Год"
